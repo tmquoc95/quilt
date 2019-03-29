@@ -24,12 +24,15 @@
   },
   "homepage": "https://github.com/Shopify/quilt/blob/master/packages/react-testing/README.md",
   "dependencies": {
+    "jest-matcher-utils": "^24.5.0",
     "react-reconciler": "^0.20.2"
   },
   "devDependencies": {
     "typescript": "~3.0.1"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "matchers.js",
+    "matchers.d.ts"
   ]
 }
