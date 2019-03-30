@@ -88,7 +88,7 @@ class CustomRoot<Props, Context extends object> extends Root<Props> {
   }
 }
 
-export function createCustomMount<
+export function createMount<
   MountOptions extends object = {},
   Context extends object = {},
   Async extends boolean = false

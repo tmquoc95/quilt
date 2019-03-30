@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Root} from '../root';
-import {mount, createCustomMount} from '../mount';
+import {mount, createMount} from '../mount';
 import {destroyAll} from '../destroy';
 
 describe('mount()', () => {
@@ -18,12 +18,12 @@ describe('mount()', () => {
   });
 });
 
-describe('createCustomMount()', () => {
+describe('createMount()', () => {
   it('calls context() with the passed options', () => {
     const spy = jest.fn();
     const options = {foo: 'bar'};
 
-    const customMount = createCustomMount<typeof options>({
+    const customMount = createMount<typeof options>({
       context: spy,
       render: element => element,
     });
@@ -35,7 +35,7 @@ describe('createCustomMount()', () => {
 
   it('stores the result of calling context() on Root#context', () => {
     const context = {foo: 'barbaz'};
-    const customMount = createCustomMount<{}, typeof context>({
+    const customMount = createMount<{}, typeof context>({
       context: () => context,
       render: element => element,
     });
@@ -51,7 +51,7 @@ describe('createCustomMount()', () => {
     const element = <div />;
     const spy = jest.fn((element: React.ReactElement<{}>) => element);
 
-    const customMount = createCustomMount<typeof options, typeof context>({
+    const customMount = createMount<typeof options, typeof context>({
       context: () => context,
       render: spy,
     });
@@ -62,7 +62,7 @@ describe('createCustomMount()', () => {
   });
 
   it('resolves the returned Root instance to the top level node in the original tree', () => {
-    const customMount = createCustomMount({
+    const customMount = createMount({
       render: element => <span id="ShouldNotBeFound">{element}</span>,
     });
 
@@ -76,7 +76,7 @@ describe('createCustomMount()', () => {
     const spy = jest.fn();
     const options = {foo: 'bar'};
 
-    const customMount = createCustomMount<typeof options>({
+    const customMount = createMount<typeof options>({
       render: element => element,
       afterMount: spy,
     });
@@ -87,7 +87,7 @@ describe('createCustomMount()', () => {
   });
 
   it('returns a promise for the wrapper if afterMount returns a promise', async () => {
-    const customMount = createCustomMount<{}, {}, true>({
+    const customMount = createMount<{}, {}, true>({
       render: element => element,
       afterMount: () => Promise.resolve(),
     });
